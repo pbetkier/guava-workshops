@@ -21,6 +21,10 @@ public class Person {
         return age;
     }
 
+    public boolean isAdult() {
+        return age >= 18;
+    }
+
     @Override
     public String toString() {
         return Objects.toStringHelper(this)

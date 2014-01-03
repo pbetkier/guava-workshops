@@ -1,5 +1,6 @@
 package com.blogspot.pbetkier.collections.functional;
 
+import com.google.common.base.CharMatcher;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import static com.blogspot.pbetkier.collections.functional.PersonBuilder.person;
 import static com.google.common.base.Predicates.in;
 import static com.google.common.base.Predicates.not;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -19,8 +21,8 @@ public class FilteringCollectionsTest {
     @Test
     public void shouldFilterOutPersonsUnder21() {
         // given
-        Person over21 = PersonBuilder.person().name("Jan").age(30).build();
-        Person under21 = PersonBuilder.person().name("Jasio").age(12).build();
+        Person over21 = person().age(30).build();
+        Person under21 = person().age(12).build();
         List<Person> persons = Lists.newArrayList(over21, under21);
 
         // when
@@ -54,5 +56,32 @@ public class FilteringCollectionsTest {
         assertThat(allowed).containsOnly("Adam", "Ala");
     }
 
+    @Test
+    public void shouldCheckNotAllPersonsAreAdult() {
+        // given
+        Person firstAdult = person().build();
+        Person secondAdult = person().build();
+        Person notAdult = person().notAdult().build();
+        List<Person> persons = Lists.newArrayList(firstAdult, secondAdult, notAdult);
+
+        // when
+//        boolean allAreAdult = true;
+//        for (Person person : persons) {
+//            if (!person.isAdult()) {
+//                allAreAdult = false;
+//                break;
+//            }
+//        }
+        boolean allAreAdult = Iterables.all(persons, new Predicate<Person>() {
+            @Override
+            public boolean apply(Person p) {
+                return p.isAdult();
+            }
+        });
+
+        // then
+        assertThat(allAreAdult).isFalse();
+        // any is true
+    }
 
 }
