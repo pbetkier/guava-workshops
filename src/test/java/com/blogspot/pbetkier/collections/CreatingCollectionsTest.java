@@ -11,28 +11,29 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CreatingCollectionsTest {
 
     @Test
-    public void shouldCreatePrepopulatedList() {
+    public void shouldCreatePrepopulatedCollections_JDK() {
         // when
-        List<String> created = new ArrayList<>();
-        created.add("alpha");
-        created.add("beta");
-        created.add("gamma");
+        List<String> createdList = new ArrayList<>();
+        createdList.add("alpha");
+        createdList.add("beta");
+        createdList.add("gamma");
 
-//        List<String> created = Lists.newArrayList("alpha", "beta", "gamma");
+        Set<Integer> createdSet = new HashSet<>(Arrays.asList(1, 3, 5));
 
         // then
-        assertThat(created).containsExactly("alpha", "beta", "gamma");
+        assertThat(createdList).containsExactly("alpha", "beta", "gamma");
+        assertThat(createdSet).containsExactly(1, 3, 5);
     }
 
     @Test
-    public void shouldCreatePrepopulatedSet() {
+    public void shouldCreatePrepopulatedCollections_Guava() {
         // when
-        Set<Integer> created = new HashSet<>(Arrays.asList(1, 3, 5));
-
-//        Set<Integer> created = Sets.newHashSet(1, 3, 5);
+        List<String> createdList = Lists.newArrayList("alpha", "beta", "gamma");
+        Set<Integer> createdSet = Sets.newHashSet(1, 3, 5);
 
         // then
-        assertThat(created).containsExactly(1, 3, 5);
+        assertThat(createdList).containsExactly("alpha", "beta", "gamma");
+        assertThat(createdSet).containsExactly(1, 3, 5);
     }
 
 
