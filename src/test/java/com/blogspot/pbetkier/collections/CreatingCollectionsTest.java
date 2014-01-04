@@ -2,19 +2,21 @@ package com.blogspot.pbetkier.collections;
 
 import org.junit.Test;
 
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class BasicCollectionsCreatorTest {
-
-    private BasicCollectionsCreator creator = new BasicCollectionsCreator();
+public class CreatingCollectionsTest {
 
     @Test
     public void shouldCreatePrepopulatedList() {
         // when
-        List<String> created = creator.createPrepopulatedList();
+        List<String> created = new ArrayList<>();
+        created.add("alpha");
+        created.add("beta");
+        created.add("gamma");
+
+        // Lists.newArrayList("alpha", "beta", "gamma");
 
         // then
         assertThat(created).containsExactly("alpha", "beta", "gamma");
@@ -23,7 +25,9 @@ public class BasicCollectionsCreatorTest {
     @Test
     public void shouldCreatePrepopulatedSet() {
         // when
-        Set<Integer> created = creator.createPrepopulatedSet();
+        Set<Integer> created = new HashSet<>(Arrays.asList(1, 3, 5));
+
+//        Sets.newHashSet(1, 3, 5)
 
         // then
         assertThat(created).containsExactly(1, 3, 5);
