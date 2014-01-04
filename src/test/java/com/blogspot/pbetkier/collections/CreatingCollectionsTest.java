@@ -1,5 +1,7 @@
 package com.blogspot.pbetkier.collections;
 
+import com.google.common.collect.Sets;
+import org.assertj.core.util.Lists;
 import org.junit.Test;
 
 import java.util.*;
@@ -16,7 +18,7 @@ public class CreatingCollectionsTest {
         created.add("beta");
         created.add("gamma");
 
-        // Lists.newArrayList("alpha", "beta", "gamma");
+//        List<String> created = Lists.newArrayList("alpha", "beta", "gamma");
 
         // then
         assertThat(created).containsExactly("alpha", "beta", "gamma");
@@ -27,7 +29,7 @@ public class CreatingCollectionsTest {
         // when
         Set<Integer> created = new HashSet<>(Arrays.asList(1, 3, 5));
 
-//        Sets.newHashSet(1, 3, 5)
+//        Set<Integer> created = Sets.newHashSet(1, 3, 5);
 
         // then
         assertThat(created).containsExactly(1, 3, 5);

@@ -55,4 +55,18 @@ public class SetOperationsTest {
         assertThat(union).containsOnly("adam", "basia", "celina");
     }
 
+    @Test
+    public void shouldProvideSetsSymmetricDifference() {
+        // given
+        Set<String> first = Sets.newHashSet("adam", "basia");
+        Set<String> second = Sets.newHashSet("basia", "celina");
+
+        // when
+        Set<String> symmetricDifference = Sets.symmetricDifference(first, second);
+
+        // then
+        assertThat(symmetricDifference).containsOnly("adam", "celina");
+    }
+
+
 }
