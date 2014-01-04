@@ -13,16 +13,13 @@ public class SetOperationsTest {
     @Test
     public void shouldFilterOutBlacklistedUsersFromRequestingSet() {
         // given
-        Set<String> blacklisted = Sets.newHashSet("bogdan", "basia");
         Set<String> requesting = Sets.newHashSet("bogdan", "adam", "ala", "basia");
+        Set<String> blacklisted = Sets.newHashSet("bogdan", "basia");
 
         // when
-        Set<String> allowed = new HashSet<>();
-        for (String user : requesting) {
-            if (!blacklisted.contains(user)) {
-                allowed.add(user);
-            }
-        }
+        Set<String> allowed = new HashSet<>(requesting);
+        allowed.removeAll(blacklisted);
+
 //        Set<String> allowed = Sets.difference(requesting, blacklisted);
 
         // then
@@ -36,6 +33,9 @@ public class SetOperationsTest {
         Set<String> second = Sets.newHashSet("basia", "celina");
 
         // when
+//        Set<String> intersection = new HashSet<>(first);
+//        intersection.retainAll(second);
+
         Set<String> intersection = Sets.intersection(first, second);
 
         // then
@@ -49,6 +49,9 @@ public class SetOperationsTest {
         Set<String> second = Sets.newHashSet("basia", "celina");
 
         // when
+//        Set<String> union = new HashSet<>(first);
+//        union.addAll(second);
+
         Set<String> union = Sets.union(first, second);
 
         // then
@@ -62,6 +65,12 @@ public class SetOperationsTest {
         Set<String> second = Sets.newHashSet("basia", "celina");
 
         // when
+//        Set<String> symmetricDifference = new HashSet<>(first);
+//        symmetricDifference.addAll(second);
+//        Set<String> tmp = new HashSet<>(first);
+//        tmp.retainAll(second);
+//        symmetricDifference.removeAll(tmp);
+
         Set<String> symmetricDifference = Sets.symmetricDifference(first, second);
 
         // then
