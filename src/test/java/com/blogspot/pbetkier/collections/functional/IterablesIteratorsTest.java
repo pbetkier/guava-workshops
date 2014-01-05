@@ -33,7 +33,7 @@ public class IterablesIteratorsTest {
     private ArgumentCaptor<Iterable<String>> captor;
 
     @Test
-    public void shouldCreateTableRowsSwitchingBetweenBackgroundColors() {
+    public void shouldCreateTableRowsSwitchingBetweenBackgroundColors_JDK() {
         // given
         Person antek = person().name("Antek").build();
         Person basia = person().name("Basia").build();
@@ -50,16 +50,32 @@ public class IterablesIteratorsTest {
                 rows.get(i).setBackground(Color.GREEN);
             }
         }
-//        List<TableRow> rows = Lists.newArrayList();
-//        Iterator<Color> backgroundProvider = Iterators.cycle(Color.BLUE, Color.GREEN);
-//        for (Person person : persons) {
-//            rows.add(new TableRow(person.getName(), backgroundProvider.next()));
-//        }
 
         // then
         assertThat(rows).extracting("text").containsExactly("Antek", "Basia", "Celina");
         assertThat(rows).extracting("background").containsExactly(Color.BLUE, Color.GREEN, Color.BLUE);
     }
+
+    @Test
+    public void shouldCreateTableRowsSwitchingBetweenBackgroundColors_Guava() {
+        // given
+        Person antek = person().name("Antek").build();
+        Person basia = person().name("Basia").build();
+        Person celina = person().name("Celina").build();
+        List<Person> persons = Lists.newArrayList(antek, basia, celina);
+
+        // when
+        List<TableRow> rows = Lists.newArrayList();
+        Iterator<Color> backgroundProvider = Iterators.cycle(Color.BLUE, Color.GREEN);
+        for (Person person : persons) {
+            rows.add(new TableRow(person.getName(), backgroundProvider.next()));
+        }
+
+        // then
+        assertThat(rows).extracting("text").containsExactly("Antek", "Basia", "Celina");
+        assertThat(rows).extracting("background").containsExactly(Color.BLUE, Color.GREEN, Color.BLUE);
+    }
+
 
     @Test
     public void shouldSendPersonNotificationsInBatches() {

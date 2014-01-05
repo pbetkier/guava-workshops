@@ -11,6 +11,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class BiMapTest {
 
+    // IP
+
     @Test
     public void shouldProvideNameToIpMappingAndReverse_JdkOnly_iterating() {
         // given
