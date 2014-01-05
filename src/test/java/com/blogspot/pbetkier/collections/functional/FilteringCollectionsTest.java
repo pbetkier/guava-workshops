@@ -1,6 +1,6 @@
 package com.blogspot.pbetkier.collections.functional;
 
-import com.google.common.base.CharMatcher;
+import com.blogspot.pbetkier.Person;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import static com.blogspot.pbetkier.collections.functional.PersonBuilder.person;
+import static com.blogspot.pbetkier.PersonBuilder.person;
 import static com.google.common.base.Predicates.in;
 import static com.google.common.base.Predicates.not;
 import static org.assertj.core.api.Assertions.assertThat;

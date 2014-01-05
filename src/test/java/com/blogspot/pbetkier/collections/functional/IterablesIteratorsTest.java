@@ -1,5 +1,6 @@
 package com.blogspot.pbetkier.collections.functional;
 
+import com.blogspot.pbetkier.Person;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
@@ -7,7 +8,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
-import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.awt.*;
@@ -15,13 +15,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import static com.blogspot.pbetkier.collections.functional.PersonBuilder.person;
+import static com.blogspot.pbetkier.PersonBuilder.person;
 import static org.assertj.core.api.Assertions.anyOf;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.not;
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyList;
-import static org.mockito.Matchers.anyListOf;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;

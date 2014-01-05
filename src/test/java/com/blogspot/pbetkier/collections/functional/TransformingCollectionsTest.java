@@ -1,16 +1,13 @@
 package com.blogspot.pbetkier.collections.functional;
 
-import com.google.common.base.Function;
-import com.google.common.base.Functions;
-import com.google.common.collect.Collections2;
+import com.blogspot.pbetkier.Person;
 import com.google.common.collect.Lists;
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.blogspot.pbetkier.collections.functional.PersonBuilder.person;
+import static com.blogspot.pbetkier.PersonBuilder.person;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TransformingCollectionsTest {
