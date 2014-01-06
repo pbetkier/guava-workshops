@@ -45,8 +45,10 @@ public class IterablesIteratorsTest {
         }
 
         // then
-        assertThat(rows).extracting("text").containsExactly("Antek", "Basia", "Celina");
-        assertThat(rows).extracting("background").containsExactly(Color.BLUE, Color.GREEN, Color.BLUE);
+        assertThat(rows).extracting("text")
+                .containsExactly("Antek", "Basia", "Celina");
+        assertThat(rows).extracting("background")
+                .containsExactly(Color.BLUE, Color.GREEN, Color.BLUE);
     }
 
     @Test
@@ -65,8 +67,10 @@ public class IterablesIteratorsTest {
         }
 
         // then
-        assertThat(rows).extracting("text").containsExactly("Antek", "Basia", "Celina");
-        assertThat(rows).extracting("background").containsExactly(Color.BLUE, Color.GREEN, Color.BLUE);
+        assertThat(rows).extracting("text")
+                .containsExactly("Antek", "Basia", "Celina");
+        assertThat(rows).extracting("background")
+                .containsExactly(Color.BLUE, Color.GREEN, Color.BLUE);
     }
 
     @Test
