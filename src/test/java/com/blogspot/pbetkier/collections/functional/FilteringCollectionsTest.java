@@ -59,8 +59,8 @@ public class FilteringCollectionsTest {
     @Test
     public void shouldFilterOutBlacklistedUsersFromRequestingSet() {
         // given
-        Set<String> blacklisted = Sets.newHashSet("Bogdan", "Basia");
         Set<String> requesting = Sets.newHashSet("Bogdan", "Adam", "Ala", "Basia");
+        Set<String> blacklisted = Sets.newHashSet("Bogdan", "Basia");
 
         // when
         Iterable<String> allowed = Iterables.filter(requesting, not(in(blacklisted)));
