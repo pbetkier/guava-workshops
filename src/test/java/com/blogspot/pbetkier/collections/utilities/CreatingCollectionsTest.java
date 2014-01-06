@@ -22,7 +22,7 @@ public class CreatingCollectionsTest {
 
         // then
         assertThat(createdList).containsExactly("alpha", "beta", "gamma");
-        assertThat(createdSet).containsExactly(1, 3, 5);
+        assertThat(createdSet).containsOnly(1, 3, 5);
     }
 
     @Test
@@ -33,7 +33,7 @@ public class CreatingCollectionsTest {
 
         // then
         assertThat(createdList).containsExactly("alpha", "beta", "gamma");
-        assertThat(createdSet).containsExactly(1, 3, 5);
+        assertThat(createdSet).containsOnly(1, 3, 5);
     }
 
 
