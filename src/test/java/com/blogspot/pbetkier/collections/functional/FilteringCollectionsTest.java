@@ -110,4 +110,25 @@ public class FilteringCollectionsTest {
         assertThat(allAreAdult).isFalse();
     }
 
+    @Test
+    public void shouldCheckThereIsAnAdult() {
+        // given
+        Person firstAdult = person().build();
+        Person secondAdult = person().build();
+        Person notAdult = person().notAdult().build();
+        List<Person> persons = Lists.newArrayList(firstAdult, secondAdult, notAdult);
+
+        // when
+        boolean hasAdult = Iterables.any(persons, new Predicate<Person>() {
+            @Override
+            public boolean apply(Person p) {
+                return p.isAdult();
+            }
+        });
+
+        // then
+        assertThat(hasAdult).isTrue();
+    }
+
+
 }
