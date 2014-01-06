@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class FilteringCollectionsTest {
 
     @Test
-    public void shouldFilterOutPersonsUnder21() {
+    public void shouldFilterOutPersonsUnder21_JDK() {
         // given
         Person over21 = person().age(30).build();
         Person under21 = person().age(12).build();
@@ -32,12 +32,25 @@ public class FilteringCollectionsTest {
                 onlyOver21.add(person);
             }
         }
-//        Iterable<Person> onlyOver21 = Iterables.filter(persons, new Predicate<Person>() {
-//            @Override
-//            public boolean apply(Person p) {
-//                return p.getAge() >= 21;
-//            }
-//        });
+
+        // then
+        assertThat(onlyOver21).containsOnly(over21);
+    }
+
+    @Test
+    public void shouldFilterOutPersonsUnder21_Guava() {
+        // given
+        Person over21 = person().age(30).build();
+        Person under21 = person().age(12).build();
+        List<Person> persons = Lists.newArrayList(over21, under21);
+
+        // when
+        Iterable<Person> onlyOver21 = Iterables.filter(persons, new Predicate<Person>() {
+            @Override
+            public boolean apply(Person p) {
+                return p.getAge() >= 21;
+            }
+        });
 
         // then
         assertThat(onlyOver21).containsOnly(over21);
@@ -57,7 +70,7 @@ public class FilteringCollectionsTest {
     }
 
     @Test
-    public void shouldCheckNotAllPersonsAreAdult() {
+    public void shouldCheckNotAllPersonsAreAdult_JDK() {
         // given
         Person firstAdult = person().build();
         Person secondAdult = person().build();
@@ -65,13 +78,27 @@ public class FilteringCollectionsTest {
         List<Person> persons = Lists.newArrayList(firstAdult, secondAdult, notAdult);
 
         // when
-//        boolean allAreAdult = true;
-//        for (Person person : persons) {
-//            if (!person.isAdult()) {
-//                allAreAdult = false;
-//                break;
-//            }
-//        }
+        boolean allAreAdult = true;
+        for (Person person : persons) {
+            if (!person.isAdult()) {
+                allAreAdult = false;
+                break;
+            }
+        }
+
+        // then
+        assertThat(allAreAdult).isFalse();
+    }
+
+    @Test
+    public void shouldCheckNotAllPersonsAreAdult_Guava() {
+        // given
+        Person firstAdult = person().build();
+        Person secondAdult = person().build();
+        Person notAdult = person().notAdult().build();
+        List<Person> persons = Lists.newArrayList(firstAdult, secondAdult, notAdult);
+
+        // when
         boolean allAreAdult = Iterables.all(persons, new Predicate<Person>() {
             @Override
             public boolean apply(Person p) {
@@ -81,7 +108,6 @@ public class FilteringCollectionsTest {
 
         // then
         assertThat(allAreAdult).isFalse();
-        // any is true
     }
 
 }

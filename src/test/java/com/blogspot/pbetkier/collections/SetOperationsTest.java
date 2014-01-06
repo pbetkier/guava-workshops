@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class SetOperationsTest {
 
     @Test
-    public void shouldFilterOutBlacklistedUsersFromRequestingSet() {
+    public void shouldFilterOutBlacklistedUsersFromRequestingSet_JDK() {
         // given
         Set<String> requesting = Sets.newHashSet("bogdan", "adam", "ala", "basia");
         Set<String> blacklisted = Sets.newHashSet("bogdan", "basia");
@@ -20,22 +20,45 @@ public class SetOperationsTest {
         Set<String> allowed = new HashSet<>(requesting);
         allowed.removeAll(blacklisted);
 
-//        Set<String> allowed = Sets.difference(requesting, blacklisted);
-
         // then
         assertThat(allowed).containsOnly("adam", "ala");
     }
 
     @Test
-    public void shouldProvideSetsIntersection() {
+    public void shouldFilterOutBlacklistedUsersFromRequestingSet_Guava() {
+        // given
+        Set<String> requesting = Sets.newHashSet("bogdan", "adam", "ala", "basia");
+        Set<String> blacklisted = Sets.newHashSet("bogdan", "basia");
+
+        // when
+        Set<String> allowed = Sets.difference(requesting, blacklisted);
+
+        // then
+        assertThat(allowed).containsOnly("adam", "ala");
+    }
+
+
+    @Test
+    public void shouldProvideSetsIntersection_JDK() {
         // given
         Set<String> first = Sets.newHashSet("adam", "basia");
         Set<String> second = Sets.newHashSet("basia", "celina");
 
         // when
-//        Set<String> intersection = new HashSet<>(first);
-//        intersection.retainAll(second);
+        Set<String> intersection = new HashSet<>(first);
+        intersection.retainAll(second);
 
+        // then
+        assertThat(intersection).containsOnly("basia");
+    }
+
+    @Test
+    public void shouldProvideSetsIntersection_Guava() {
+        // given
+        Set<String> first = Sets.newHashSet("adam", "basia");
+        Set<String> second = Sets.newHashSet("basia", "celina");
+
+        // when
         Set<String> intersection = Sets.intersection(first, second);
 
         // then
@@ -43,15 +66,26 @@ public class SetOperationsTest {
     }
 
     @Test
-    public void shouldProvideSetsUnion() {
+    public void shouldProvideSetsUnion_JDK() {
         // given
         Set<String> first = Sets.newHashSet("adam", "basia");
         Set<String> second = Sets.newHashSet("basia", "celina");
 
         // when
-//        Set<String> union = new HashSet<>(first);
-//        union.addAll(second);
+        Set<String> union = new HashSet<>(first);
+        union.addAll(second);
 
+        // then
+        assertThat(union).containsOnly("adam", "basia", "celina");
+    }
+
+    @Test
+    public void shouldProvideSetsUnion_Guava() {
+        // given
+        Set<String> first = Sets.newHashSet("adam", "basia");
+        Set<String> second = Sets.newHashSet("basia", "celina");
+
+        // when
         Set<String> union = Sets.union(first, second);
 
         // then
@@ -59,23 +93,33 @@ public class SetOperationsTest {
     }
 
     @Test
-    public void shouldProvideSetsSymmetricDifference() {
+    public void shouldProvideSetsSymmetricDifference_JDK() {
         // given
         Set<String> first = Sets.newHashSet("adam", "basia");
         Set<String> second = Sets.newHashSet("basia", "celina");
 
         // when
-//        Set<String> symmetricDifference = new HashSet<>(first);
-//        symmetricDifference.addAll(second);
-//        Set<String> tmp = new HashSet<>(first);
-//        tmp.retainAll(second);
-//        symmetricDifference.removeAll(tmp);
-
-        Set<String> symmetricDifference = Sets.symmetricDifference(first, second);
+        Set<String> symmetricDifference = new HashSet<>(first);
+        symmetricDifference.addAll(second);
+        Set<String> tmp = new HashSet<>(first);
+        tmp.retainAll(second);
+        symmetricDifference.removeAll(tmp);
 
         // then
         assertThat(symmetricDifference).containsOnly("adam", "celina");
     }
 
+    @Test
+    public void shouldProvideSetsSymmetricDifference_Guava() {
+        // given
+        Set<String> first = Sets.newHashSet("adam", "basia");
+        Set<String> second = Sets.newHashSet("basia", "celina");
+
+        // when
+        Set<String> symmetricDifference = Sets.symmetricDifference(first, second);
+
+        // then
+        assertThat(symmetricDifference).containsOnly("adam", "celina");
+    }
 
 }

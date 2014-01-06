@@ -10,7 +10,7 @@ public class CharMatchersTest {
     @Test
     public void shouldRemoveWhitespaces() {
         // given
-        String unformattedText = "  Unfor  mat\nted \nText";
+        String unformattedText = "  Unfor  mat\nted \tText";
 
         // when
         String withoutWhitespace = CharMatcher.WHITESPACE.removeFrom(unformattedText);

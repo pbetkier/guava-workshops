@@ -2,6 +2,7 @@ package com.blogspot.pbetkier.collections.new_types;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
+import com.google.common.collect.MinMaxPriorityQueue;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -14,7 +15,7 @@ public class BiMapTest {
     // IP
 
     @Test
-    public void shouldProvideNameToIpMappingAndReverse_JdkOnly_iterating() {
+    public void shouldProvideNameToIpMappingAndReverse_JDK_iterating() {
         // given
         Map<String, String> nameToIp = new HashMap<>();
         nameToIp.put("github.com", "1.1.1.1");
@@ -35,7 +36,7 @@ public class BiMapTest {
     }
 
     @Test
-    public void shouldProvideNameToIpMappingAndReverse_JdkOnly_two_maps() {
+    public void shouldProvideNameToIpMappingAndReverse_JDK_two_maps() {
         // given
         Map<String, String> nameToIp = new HashMap<>();
         Map<String, String> ipToName = new HashMap<>();
@@ -56,7 +57,7 @@ public class BiMapTest {
     }
 
     @Test
-    public void shouldProvideNameToIpMappingAndReverse_GuavaBiMap() {
+    public void shouldProvideNameToIpMappingAndReverse_Guava() {
         // given
         BiMap<String, String> nameToIp = HashBiMap.create();
         nameToIp.put("github.com", "1.1.1.1");
