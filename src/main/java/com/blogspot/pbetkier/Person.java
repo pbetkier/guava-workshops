@@ -42,9 +42,27 @@ public class Person {
 
     @Override
     public String toString() {
+//        Person{name=Alicja, age=25}
         return Objects.toStringHelper(this)
                 .add("name", name)
                 .add("age", age)
                 .toString();
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (!(other instanceof Person)) {
+            return false;
+        }
+
+        Person otherPerson = (Person) other;
+        return Objects.equal(name, otherPerson.name) &&
+                Objects.equal(age, otherPerson.age);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(name, age);
+    }
+
 }
