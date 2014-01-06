@@ -16,12 +16,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import static com.blogspot.pbetkier.PersonBuilder.person;
-import static org.assertj.core.api.Assertions.anyOf;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class IterablesIteratorsTest {
@@ -72,7 +68,6 @@ public class IterablesIteratorsTest {
         assertThat(rows).extracting("text").containsExactly("Antek", "Basia", "Celina");
         assertThat(rows).extracting("background").containsExactly(Color.BLUE, Color.GREEN, Color.BLUE);
     }
-
 
     @Test
     public void shouldSendPersonNotificationsInBatches() {

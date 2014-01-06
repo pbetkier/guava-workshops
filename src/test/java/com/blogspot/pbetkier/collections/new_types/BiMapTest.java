@@ -2,7 +2,6 @@ package com.blogspot.pbetkier.collections.new_types;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
-import com.google.common.collect.MinMaxPriorityQueue;
 import org.junit.Test;
 
 import java.util.HashMap;

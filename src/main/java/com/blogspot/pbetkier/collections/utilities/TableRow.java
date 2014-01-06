@@ -1,7 +1,5 @@
 package com.blogspot.pbetkier.collections.utilities;
 
-import com.google.common.base.Objects;
-
 import java.awt.*;
 
 public class TableRow {
