@@ -1,4 +1,4 @@
-package com.blogspot.pbetkier.collections;
+package com.blogspot.pbetkier.collections.utilities;
 
 import com.google.common.collect.Sets;
 import org.junit.Test;

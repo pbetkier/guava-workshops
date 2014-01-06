@@ -1,4 +1,4 @@
-package com.blogspot.pbetkier.collections.functional;
+package com.blogspot.pbetkier.collections.utilities;
 
 import com.blogspot.pbetkier.Person;
 import com.google.common.collect.Iterables;
