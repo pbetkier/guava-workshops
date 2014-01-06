@@ -1,6 +1,7 @@
 package com.blogspot.pbetkier.basic;
 
 import com.google.common.base.Objects;
+import com.google.common.base.Optional;
 import com.google.common.base.Strings;
 import org.junit.Test;
 
@@ -36,5 +37,32 @@ public class NullSafetyTest {
         assertThat(resolvedStartDate).isEqualTo(currentDate);
     }
 
-    // Optional
+    @Test
+    public void shouldCreatePresentOptional() {
+        // given
+        Integer value = 5;
+
+        // when
+        Optional<Integer> possibleValue = Optional.of(value);
+
+        // then
+        assertThat(possibleValue.isPresent()).isTrue();
+        assertThat(possibleValue.get()).isEqualTo(5);
+    }
+
+    @Test
+    public void shouldCreateAbsentOptional() {
+        // when
+        Optional<Integer> possibleValue = Optional.absent();
+
+        // then
+        assertThat(possibleValue.isPresent()).isFalse();
+    }
+
+    @Test
+    public void shouldReturnDefaultValueOnlyIfOptionalAbsent() {
+        assertThat(Optional.of(5).or(0)).isEqualTo(5);
+        assertThat(Optional.absent().or(0)).isEqualTo(0);
+    }
+
 }
