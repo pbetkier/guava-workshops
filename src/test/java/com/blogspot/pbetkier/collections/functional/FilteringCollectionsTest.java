@@ -26,15 +26,15 @@ public class FilteringCollectionsTest {
         List<Person> persons = Lists.newArrayList(over21, under21);
 
         // when
-        List<Person> onlyOver21 = new ArrayList<>();
+        List<Person> only21OrMore = new ArrayList<>();
         for (Person person : persons) {
             if (person.getAge() >= 21) {
-                onlyOver21.add(person);
+                only21OrMore.add(person);
             }
         }
 
         // then
-        assertThat(onlyOver21).containsOnly(over21);
+        assertThat(only21OrMore).containsOnly(over21);
     }
 
     @Test
@@ -45,7 +45,7 @@ public class FilteringCollectionsTest {
         List<Person> persons = Lists.newArrayList(over21, under21);
 
         // when
-        Iterable<Person> onlyOver21 = Iterables.filter(persons, new Predicate<Person>() {
+        Iterable<Person> only21OrMore = Iterables.filter(persons, new Predicate<Person>() {
             @Override
             public boolean apply(Person p) {
                 return p.getAge() >= 21;
@@ -53,7 +53,7 @@ public class FilteringCollectionsTest {
         });
 
         // then
-        assertThat(onlyOver21).containsOnly(over21);
+        assertThat(only21OrMore).containsOnly(over21);
     }
 
     @Test
