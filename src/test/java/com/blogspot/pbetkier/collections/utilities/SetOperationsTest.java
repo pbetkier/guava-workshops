@@ -11,6 +11,24 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class SetOperationsTest {
 
     @Test
+    public void shouldFilterOutBlacklistedUsersFromRequestingSet_JDK_iterating() {
+        // given
+        Set<String> requesting = Sets.newHashSet("bogdan", "adam", "ala", "basia");
+        Set<String> blacklisted = Sets.newHashSet("bogdan", "basia");
+
+        // when
+        Set<String> allowed = new HashSet<>();
+        for (String user : requesting) {
+            if (!blacklisted.contains(user)) {
+                allowed.add(user);
+            }
+        }
+
+        // then
+        assertThat(allowed).containsOnly("adam", "ala");
+    }
+
+    @Test
     public void shouldFilterOutBlacklistedUsersFromRequestingSet_JDK() {
         // given
         Set<String> requesting = Sets.newHashSet("bogdan", "adam", "ala", "basia");
