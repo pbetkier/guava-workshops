@@ -29,7 +29,6 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        Person person = new Person(name, age);
-        return person;
+        return new Person(name, age);
     }
 }

@@ -12,6 +12,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class IterablesIteratorsTest {
         Person antek = person().name("Antek").build();
         Person basia = person().name("Basia").build();
         Person celina = person().name("Celina").build();
-        List<Person> persons = Lists.newArrayList(antek, basia, celina);
+        List<Person> persons = Arrays.asList(antek, basia, celina);
 
         // when
         List<TableRow> rows = new ArrayList<>();
@@ -60,8 +61,8 @@ public class IterablesIteratorsTest {
         List<Person> persons = Lists.newArrayList(antek, basia, celina);
 
         // when
-        List<TableRow> rows = Lists.newArrayList();
         Iterator<Color> backgroundProvider = Iterators.cycle(Color.BLUE, Color.GREEN);
+        List<TableRow> rows = Lists.newArrayList();
         for (Person person : persons) {
             rows.add(new TableRow(person.getName(), backgroundProvider.next()));
         }
@@ -74,9 +75,9 @@ public class IterablesIteratorsTest {
     }
 
     @Test
-    public void shouldSendPersonNotificationsInBatches() {
+    public void shouldSendPersonalNotificationsInBatches() {
         // given
-        List<String> toNotify = Lists.newArrayList("Ania", "Basia", "Celina", "Danusia", "Ewa");
+        List<String> toNotify = Lists.newArrayList("Ania", "Basia", "Celina", "Danuta", "Ewa");
         NotificationService notificationService = mock(NotificationService.class);
 
         // when

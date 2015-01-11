@@ -11,13 +11,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class SetOperationsTest {
 
     @Test
-    public void shouldFilterOutBlacklistedUsersFromRequestingSet_JDK_iterating() {
+    public void shouldFilterOutBlacklistedUsersFromRequestingSet_JDK7_iterating() {
         // given
         Set<String> requesting = Sets.newHashSet("bogdan", "adam", "ala", "basia");
         Set<String> blacklisted = Sets.newHashSet("bogdan", "basia");
 
         // when
-        Set<String> allowed = new HashSet<>();
+        Set<String> allowed = new HashSet<>();  // use streams in JDK 8!
         for (String user : requesting) {
             if (!blacklisted.contains(user)) {
                 allowed.add(user);

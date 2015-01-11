@@ -4,22 +4,19 @@ import com.blogspot.pbetkier.Person;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+import java.util.stream.Collectors;
 
 import static com.blogspot.pbetkier.PersonBuilder.person;
-import static com.google.common.base.Predicates.in;
-import static com.google.common.base.Predicates.not;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class FilteringCollectionsTest {
 
     @Test
-    public void shouldFilterOutPersonsUnder21_JDK7() {
+    public void shouldFilterOutPersonsUnder21_JDK7_iterating() {
         // given
         Person over21 = person().age(30).build();
         Person under21 = person().age(12).build();
@@ -56,17 +53,21 @@ public class FilteringCollectionsTest {
         assertThat(only21OrMore).containsOnly(over21);
     }
 
+
     @Test
-    public void shouldFilterOutBlacklistedUsersFromRequestingSet() {
+    public void shouldFilterOutPersonsUnder21_JDK8_streams() {
         // given
-        Set<String> requesting = Sets.newHashSet("Bogdan", "Adam", "Ala", "Basia");
-        Set<String> blacklisted = Sets.newHashSet("Bogdan", "Basia");
+        Person over21 = person().age(30).build();
+        Person under21 = person().age(12).build();
+        List<Person> persons = Lists.newArrayList(over21, under21);
 
         // when
-        Iterable<String> allowed = Iterables.filter(requesting, not(in(blacklisted)));
+        List<Person> only21OrMore = persons.stream()
+                .filter(p -> p.getAge() >= 21)
+                .collect(Collectors.toList());
 
         // then
-        assertThat(allowed).containsOnly("Adam", "Ala");
+        assertThat(only21OrMore).containsOnly(over21);
     }
 
     @Test
@@ -111,7 +112,7 @@ public class FilteringCollectionsTest {
     }
 
     @Test
-    public void shouldCheckThereIsAnAdult() {
+    public void shouldCheckThereIsAnAdult_JDK8_streams() {
         // given
         Person firstAdult = person().build();
         Person secondAdult = person().build();
@@ -119,12 +120,7 @@ public class FilteringCollectionsTest {
         List<Person> persons = Lists.newArrayList(firstAdult, secondAdult, notAdult);
 
         // when
-        boolean hasAdult = Iterables.any(persons, new Predicate<Person>() {
-            @Override
-            public boolean apply(Person p) {
-                return p.isAdult();
-            }
-        });
+        boolean hasAdult = persons.stream().anyMatch(Person::isAdult);
 
         // then
         assertThat(hasAdult).isTrue();

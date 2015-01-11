@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.blogspot.pbetkier.PersonBuilder.person;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -14,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class TransformingCollectionsTest {
 
     @Test
-    public void shouldExtractPersonNames_JDK() {
+    public void shouldExtractPersonNames_JDK7_iterating() {
         // given
         Person antek = person().name("Antek").build();
         Person basia = person().name("Basia").build();
@@ -44,6 +45,20 @@ public class TransformingCollectionsTest {
                 return p.getName();
             }
         });
+
+        // then
+        assertThat(names).containsExactly("Antek", "Basia");
+    }
+
+    @Test
+    public void shouldExtractPersonNames_JDK8_streams() {
+        // given
+        Person antek = person().name("Antek").build();
+        Person basia = person().name("Basia").build();
+        List<Person> persons = Lists.newArrayList(antek, basia);
+
+        // when
+        List<String> names = persons.stream().map(Person::getName).collect(Collectors.toList());
 
         // then
         assertThat(names).containsExactly("Antek", "Basia");

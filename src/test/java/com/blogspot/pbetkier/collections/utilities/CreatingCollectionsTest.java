@@ -4,7 +4,10 @@ import com.google.common.collect.Sets;
 import org.assertj.core.util.Lists;
 import org.junit.Test;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -13,11 +16,7 @@ public class CreatingCollectionsTest {
     @Test
     public void shouldCreatePrepopulatedCollections_JDK() {
         // when
-        List<String> createdList = new ArrayList<>();
-        createdList.add("alpha");
-        createdList.add("beta");
-        createdList.add("gamma");
-
+        List<String> createdList = Arrays.asList("alpha", "beta", "gamma");
         Set<Integer> createdSet = new HashSet<>(Arrays.asList(1, 3, 5));
 
         // then
@@ -35,6 +34,5 @@ public class CreatingCollectionsTest {
         assertThat(createdList).containsExactly("alpha", "beta", "gamma");
         assertThat(createdSet).containsOnly(1, 3, 5);
     }
-
 
 }
