@@ -7,8 +7,9 @@ import org.junit.Test;
 import java.util.Map;
 import java.util.TreeMap;
 
-import static com.googlecode.catchexception.CatchException.catchException;
 import static com.googlecode.catchexception.CatchException.caughtException;
+import static com.googlecode.catchexception.apis.CatchExceptionAssertJ.then;
+import static com.googlecode.catchexception.apis.CatchExceptionAssertJ.when;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class JoinerTest {
@@ -25,10 +26,10 @@ public class JoinerTest {
     @Test
     public void shouldFailIfJoiningNullInteger() {
         // when
-        catchException(Joiner.on(", ")).join(Lists.newArrayList(1, 4, null, 2));
+        when(Joiner.on(", ")).join(Lists.newArrayList(1, 4, null, 2));
 
         // then
-        assertThat(caughtException()).isInstanceOf(NullPointerException.class);
+        then(caughtException()).isInstanceOf(NullPointerException.class);
     }
 
     @Test

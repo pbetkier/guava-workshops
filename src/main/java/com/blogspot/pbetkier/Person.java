@@ -1,5 +1,6 @@
 package com.blogspot.pbetkier;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -43,7 +44,7 @@ public class Person {
     @Override
     public String toString() {
 //        Person{name=Alicja, age=25}
-        return Objects.toStringHelper(this)
+        return MoreObjects.toStringHelper(this)
                 .add("name", name)
                 .add("age", age)
                 .toString();
