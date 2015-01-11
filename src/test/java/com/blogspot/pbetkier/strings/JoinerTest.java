@@ -4,8 +4,11 @@ import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import org.junit.Test;
 
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 import static com.googlecode.catchexception.CatchException.caughtException;
 import static com.googlecode.catchexception.apis.CatchExceptionAssertJ.then;
@@ -63,6 +66,21 @@ public class JoinerTest {
 
         // then
         assertThat(joined).isEqualTo("Ania is 11, Basia is 27, Celina is 21");
+    }
+
+    @Test
+    public void shouldJoinIntegersToCommaSeparatedStringSkippingNulls_JDK8() {
+        // given
+        List<Integer> ints = Lists.newArrayList(1, 4, null, 2);
+
+        // when
+        String joined = ints.stream()
+                .filter(Objects::nonNull)
+                .map(Object::toString)
+                .collect(Collectors.joining(", "));
+
+        // then
+        assertThat(joined).isEqualTo("1, 4, 2");
     }
 
 }

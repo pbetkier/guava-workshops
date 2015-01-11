@@ -1,31 +1,29 @@
 package com.blogspot.pbetkier;
 
 import com.google.common.base.MoreObjects;
-import com.google.common.base.Objects;
+import com.google.common.base.Preconditions;
 
-import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Preconditions.checkNotNull;
+import java.util.Objects;
 
 public class Person {
 
     private String name;
-
     private int age;
 
     public Person(String name, int age) {
-        checkNotNull(name, "Name cannot be null.");
-        checkArgument(age >= 0, "Age cannot be less than 0 (was %s).", age);
+        Preconditions.checkNotNull(name, "Name cannot be null.");
+        Preconditions.checkArgument(age >= 0, "Age cannot be less than 0 (was %s).", age);
 
         this.name = name;
         this.age = age;
     }
 
     public void renameTo(String name) {
-        this.name = checkNotNull(name, "Cannot rename to null.");
+        this.name = Preconditions.checkNotNull(name, "Cannot rename to null.");
     }
 
     public void increaseAgeTo(int age) {
-        checkArgument(age > this.age, "New age (%s) is less than previous (%s).", age, this.age);
+        Preconditions.checkArgument(age > this.age, "New age (%s) is less than previous (%s).", age, this.age);
         this.age = age;
     }
 
@@ -41,9 +39,11 @@ public class Person {
         return age >= 18;
     }
 
+    /**
+     * e.g. Person{name=Alicja, age=25}
+     */
     @Override
     public String toString() {
-//        Person{name=Alicja, age=25}
         return MoreObjects.toStringHelper(this)
                 .add("name", name)
                 .add("age", age)
@@ -57,13 +57,13 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return Objects.equal(name, otherPerson.name) &&
-                Objects.equal(age, otherPerson.age);
+        return Objects.equals(name, otherPerson.name) &&
+                Objects.equals(age, otherPerson.age);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(name, age);
+        return Objects.hash(name, age);
     }
 
 }

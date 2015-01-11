@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class FilteringCollectionsTest {
 
     @Test
-    public void shouldFilterOutPersonsUnder21_JDK() {
+    public void shouldFilterOutPersonsUnder21_JDK7() {
         // given
         Person over21 = person().age(30).build();
         Person under21 = person().age(12).build();
@@ -70,7 +70,7 @@ public class FilteringCollectionsTest {
     }
 
     @Test
-    public void shouldCheckNotAllPersonsAreAdult_JDK() {
+    public void shouldCheckNotAllPersonsAreAdult_JDK7() {
         // given
         Person firstAdult = person().build();
         Person secondAdult = person().build();
