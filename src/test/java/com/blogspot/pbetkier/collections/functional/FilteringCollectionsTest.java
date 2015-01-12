@@ -112,6 +112,21 @@ public class FilteringCollectionsTest {
     }
 
     @Test
+    public void shouldCheckNotAllPersonsAreAdult_JDK8_streams() {
+        // given
+        Person firstAdult = person().build();
+        Person secondAdult = person().build();
+        Person notAdult = person().notAdult().build();
+        List<Person> persons = Lists.newArrayList(firstAdult, secondAdult, notAdult);
+
+        // when
+        boolean allAreAdult = persons.stream().allMatch(Person::isAdult);
+
+        // then
+        assertThat(allAreAdult).isFalse();
+    }
+
+    @Test
     public void shouldCheckThereIsAnAdult_JDK8_streams() {
         // given
         Person firstAdult = person().build();
@@ -125,6 +140,7 @@ public class FilteringCollectionsTest {
         // then
         assertThat(hasAdult).isTrue();
     }
+
 
 
 }

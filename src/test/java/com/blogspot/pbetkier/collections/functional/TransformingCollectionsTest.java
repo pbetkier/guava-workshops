@@ -58,7 +58,9 @@ public class TransformingCollectionsTest {
         List<Person> persons = Lists.newArrayList(antek, basia);
 
         // when
-        List<String> names = persons.stream().map(Person::getName).collect(Collectors.toList());
+        List<String> names = persons.stream()
+                .map(Person::getName)
+                .collect(Collectors.toList());
 
         // then
         assertThat(names).containsExactly("Antek", "Basia");

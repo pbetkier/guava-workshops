@@ -23,7 +23,10 @@ public class NullSafetyTest {
         assertThat(Strings.nullToEmpty("other")).isEqualTo("other");
     }
 
-    /** Optionals are in JDK since Java 8, use Guava if you're stuck with an earlier version */
+    /**
+     * Optionals are in JDK since Java 8,
+     * use Guava if you're stuck with an earlier version
+     */
     @Test
     public void shouldCreateOptionalWithAValue_JDK8() {
         // given

@@ -38,7 +38,9 @@ public class JoinerTest {
     @Test
     public void shouldJoinWithPlaceholderForNulls() {
         // when
-        String joined = Joiner.on(", ").useForNull("-").join(Lists.newArrayList(1, 4, null, 2));
+        String joined = Joiner.on(", ")
+                .useForNull("-")
+                .join(Lists.newArrayList(1, 4, null, 2));
 
         // then
         assertThat(joined).isEqualTo("1, 4, -, 2");
@@ -47,7 +49,9 @@ public class JoinerTest {
     @Test
     public void shouldJoinSkippingNulls() {
         // when
-        String joined = Joiner.on(", ").skipNulls().join(Lists.newArrayList(1, 4, null, 2));
+        String joined = Joiner.on(", ")
+                .skipNulls()
+                .join(Lists.newArrayList(1, 4, null, 2));
 
         // then
         assertThat(joined).isEqualTo("1, 4, 2");
@@ -62,7 +66,9 @@ public class JoinerTest {
         nameToAge.put("Celina", 21);
 
         // when
-        String joined = Joiner.on(", ").withKeyValueSeparator(" is ").join(nameToAge);
+        String joined = Joiner.on(", ")
+                .withKeyValueSeparator(" is ")
+                .join(nameToAge);
 
         // then
         assertThat(joined).isEqualTo("Ania is 11, Basia is 27, Celina is 21");

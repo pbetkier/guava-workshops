@@ -48,6 +48,7 @@ public class PreconditionsTest {
 
     @Test
     public void shouldFailIfIncreasedAgeIsNotGreaterThanPrevious() {
+        // given
         Person person = person().age(18).build();
 
         // when
